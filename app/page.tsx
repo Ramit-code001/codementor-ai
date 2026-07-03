@@ -7,13 +7,13 @@ export default function Home() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-black text-white flex items-center justify-center px-6">
-        <section className="max-w-4xl text-center">
+     <main className="min-h-screen bg-linear-to-b from-black via-gray-950 to-black text-white flex items-center justify-center px-6">
+        <section className="max-w-4xl text-center py-24">
           <p className="text-blue-400 font-semibold tracking-widest uppercase">
             Welcome To
           </p>
 
-          <h1 className="mt-4 text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">
+          <h1 className="mt-4 text-5xl md:text-7xl font-extrabold bg-linear-to-r from-blue-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">
             CodeMentor AI
           </h1>
 
@@ -28,7 +28,7 @@ export default function Home() {
             Science students and developers.
           </p>
 
-          <button className="mt-10 rounded-xl bg-blue-600 px-8 py-4 text-lg font-semibold text-white hover:bg-blue-500 transition">
+          <button className="mt-10 rounded-xl bg-linear-to-r from-blue-600 to-cyan-500 px-10 py-4 text-lg font-semibold text-white shadow-lg hover:scale-105 hover:shadow-blue-500/40 transition-all duration-300">
             🚀 Start Reviewing
           </button>
         </section>
