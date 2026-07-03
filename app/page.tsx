@@ -4,6 +4,7 @@ import Testimonials from "./Testimonials";
 import Contact from "./Contact";
 import Footer from "./components/Footer";
 import About from "./About";
+import CodeReview from "./CodeReview";
 export default function Home() {
   return (
     <>
@@ -41,6 +42,10 @@ export default function Home() {
 
 <section id="features">
   <Features />
+</section>
+
+<section id="review">
+  <CodeReview />
 </section>
 
 <section id="testimonials">
