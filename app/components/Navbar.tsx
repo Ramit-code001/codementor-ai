@@ -8,11 +8,24 @@ export default function Navbar() {
         </h1>
 
         <div className="hidden md:flex gap-8 text-gray-300 font-medium">
-          <a href="#">Home</a>
-          <a href="#">Features</a>
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-        </div>
+
+  <a href="/" className="hover:text-white transition">
+    Home
+  </a>
+
+  <a href="#about" className="hover:text-white transition">
+    About
+  </a>
+
+  <a href="#features" className="hover:text-white transition">
+    Features
+  </a>
+
+  <a href="#contact" className="hover:text-white transition">
+    Contact
+  </a>
+
+</div>
 
         <div className="flex gap-3">
           <button className="px-4 py-2 rounded-lg border border-gray-700 text-white">

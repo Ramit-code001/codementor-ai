@@ -1,7 +1,9 @@
 import Navbar from "./components/Navbar";
 import Features from "./Features";
 import Testimonials from "./Testimonials";
-
+import Contact from "./Contact";
+import Footer from "./components/Footer";
+import About from "./About";
 export default function Home() {
   return (
     <>
@@ -33,9 +35,23 @@ export default function Home() {
           </button>
         </section>
       </main>
+     <section id="about">
+  <About />
+</section>
 
-      <Features />
-      <Testimonials />
+<section id="features">
+  <Features />
+</section>
+
+<section id="testimonials">
+  <Testimonials />
+</section>
+
+<section id="contact">
+  <Contact />
+</section>
+
+<Footer />
     </>
   );
 }
