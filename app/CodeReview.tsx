@@ -7,22 +7,38 @@ export default function CodeReview() {
   const [code, setCode] = useState("");
   const [review, setReview] = useState("");
 
-  const handleReview = () => {
-    if (!code.trim()) {
-      setReview("⚠️ Please paste your code first.");
+  const handleReview = async () => {
+  if (!code.trim()) {
+    setReview("⚠️ Please paste your code first.");
+    return;
+  }
+
+  setReview("⏳ Reviewing your code...");
+
+  try {
+    const res = await fetch("/api/review", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        code,
+        language,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setReview(data.error || "Something went wrong.");
       return;
     }
 
-    setReview(`
-Language: ${language}
-
-✅ Your code has been received successfully.
-
-🤖 AI review will be connected in the next step.
-
-Lines of code: ${code.split("\n").length}
-`);
-  };
+    setReview(data.review);
+  } catch (error) {
+    setReview("❌ Failed to connect to AI.");
+  }
+};
 
   return (
     <section className="bg-black text-white py-24 px-6">
