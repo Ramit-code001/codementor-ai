@@ -7,6 +7,7 @@ export default function CodeReview() {
   const [code, setCode] = useState("");
   const [review, setReview] = useState("");
   const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const handleReview = async () => {
     if (!code.trim()) {
@@ -38,9 +39,9 @@ export default function CodeReview() {
       }
 
       setReview(data.review);
-      setLoading(false);
     } catch (error) {
       setReview("❌ Failed to connect to AI.");
+    } finally {
       setLoading(false);
     }
   };
@@ -48,6 +49,22 @@ export default function CodeReview() {
   const handleClear = () => {
     setCode("");
     setReview("");
+    setCopied(false);
+  };
+
+  const handleCopy = async () => {
+    if (!review) return;
+
+    try {
+      await navigator.clipboard.writeText(review);
+      setCopied(true);
+
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch {
+      alert("Failed to copy review.");
+    }
   };
 
   return (
@@ -129,6 +146,14 @@ export default function CodeReview() {
             <div className="rounded-xl bg-black border border-gray-700 p-5 min-h-[420px] text-gray-400 whitespace-pre-wrap">
               {review || "AI response will appear here..."}
             </div>
+
+            <button
+              onClick={handleCopy}
+              disabled={!review}
+              className="mt-4 w-full rounded-xl bg-green-600 py-3 font-semibold hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {copied ? "✅ Copied!" : "📋 Copy Review"}
+            </button>
 
           </div>
 
