@@ -6,39 +6,45 @@ export default function CodeReview() {
   const [language, setLanguage] = useState("JavaScript");
   const [code, setCode] = useState("");
   const [review, setReview] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleReview = async () => {
-  if (!code.trim()) {
-    setReview("⚠️ Please paste your code first.");
-    return;
-  }
-
-  setReview("⏳ Reviewing your code...");
-
-  try {
-    const res = await fetch("/api/review", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        code,
-        language,
-      }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      setReview(data.error || "Something went wrong.");
+    if (!code.trim()) {
+      setReview("⚠️ Please paste your code first.");
       return;
     }
 
-    setReview(data.review);
-  } catch (error) {
-    setReview("❌ Failed to connect to AI.");
-  }
-};
+    setLoading(true);
+    setReview("⏳ Reviewing your code...");
+
+    try {
+      const res = await fetch("/api/review", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          code,
+          language,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setReview(data.error || "Something went wrong.");
+        setLoading(false);
+        return;
+      }
+
+      setReview(data.review);
+      setLoading(false);
+
+    } catch (error) {
+      setReview("❌ Failed to connect to AI.");
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="bg-black text-white py-24 px-6">
@@ -94,9 +100,10 @@ export default function CodeReview() {
 
             <button
               onClick={handleReview}
-              className="mt-6 w-full rounded-xl bg-blue-600 py-4 font-semibold hover:bg-blue-700 transition"
+              disabled={loading}
+              className="mt-6 w-full rounded-xl bg-blue-600 py-4 font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              🚀 Review Code
+              {loading ? "⏳ Reviewing..." : "🚀 Review Code"}
             </button>
 
           </div>
