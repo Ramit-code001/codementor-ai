@@ -39,11 +39,15 @@ export default function CodeReview() {
 
       setReview(data.review);
       setLoading(false);
-
     } catch (error) {
       setReview("❌ Failed to connect to AI.");
       setLoading(false);
     }
+  };
+
+  const handleClear = () => {
+    setCode("");
+    setReview("");
   };
 
   return (
@@ -104,6 +108,13 @@ export default function CodeReview() {
               className="mt-6 w-full rounded-xl bg-blue-600 py-4 font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? "⏳ Reviewing..." : "🚀 Review Code"}
+            </button>
+
+            <button
+              onClick={handleClear}
+              className="mt-3 w-full rounded-xl border border-gray-700 py-4 font-semibold hover:bg-gray-800 transition"
+            >
+              🗑️ Clear
             </button>
 
           </div>
